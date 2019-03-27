@@ -1,10 +1,35 @@
 #!/usr/bin/env python3
 ##
 ## EPITECH PROJECT, 2019
-## 204duck_2018
+## 204ducks_2018
 ## File description:
-## 204duck
+## 204ducks
 ##
 
+from sys import stderr, argv
+
+def error(str: str):
+    """Exits with str on error output."""
+    stderr.write(str)
+    exit(84)
+
+def usage():
+    """Displays usage."""
+    print('USAGE\n\t./204ducks a\n')
+    print('DESCRIPTION\n\ta\tconstant')
+
+def ducks(data: float):
+    """204ducks main function."""
+    print(data)
+
 if __name__ == "__main__":
-    pass
+    if len(argv) != 2:
+        error('Invalid number of arguments, type \'-h\' for more informations.\n')
+    elif len(argv) == 2 and argv[1] == "-h":
+        usage()
+    else:
+        try:
+            data = float(argv[1])
+        except:
+            error('\'a\' must be a float. \'-h\' for more informations.\n')
+        ducks(data)
