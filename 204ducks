@@ -20,7 +20,12 @@ def usage():
 
 def display(data: float):
     """Displays results."""
-    pass
+    print('Average return time:', 'Standard deviation:',
+    'Time after which 50% of the ducks are back:',
+    'Time after which 99% of the ducks are back:',
+    'Percentage of ducks back after 1 minute:',
+    'Percentage of ducks back after 2 minutes:',
+    sep='\n')
 
 def ducks(data: float):
     """204ducks main function."""
