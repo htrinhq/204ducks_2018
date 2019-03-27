@@ -18,9 +18,16 @@ def usage():
     print('USAGE\n\t./204ducks a\n')
     print('DESCRIPTION\n\ta\tconstant')
 
+def display(data: float):
+    """Displays results."""
+    pass
+
 def ducks(data: float):
     """204ducks main function."""
-    print(data)
+    if data >= 0 and data <= 2.5:
+        display(data)
+    else:
+        error('\'a\' must be a float constant between 0 and 2.5.\n')
 
 if __name__ == "__main__":
     if len(argv) != 2:
