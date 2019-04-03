@@ -39,16 +39,16 @@ def getProba(data: float, t: float) -> float:
 
 def display(data: float):
     """Displays results."""
-    minute, tenSec, sec = duckReturn(0.5, data)
-    min, ten, s = duckReturn(0.99, data)
     print('Average return time: {:.02f}' .format(data),
         'Standard deviation:',
-        'Time after which 50% of the ducks are back: {:d}m {:d}{:d}s'
-        .format(minute, tenSec, sec),
-        'Time after which 99% of the ducks are back: {:d}m {:d}{:d}s'
-        .format(min, ten, s),
-        'Percentage of ducks back after 1 minute:',
-        'Percentage of ducks back after 2 minutes:',
+        'Time after which 50% of the ducks are back: {0[0]}m {0[1]}{0[2]}s'
+        .format(duckReturn(0.5, data)),
+        'Time after which 99% of the ducks are back: {0[0]}m {0[1]}{0[2]}s'
+        .format(duckReturn(0.99, data)),
+        'Percentage of ducks back after 1 minute: {:.01f}%'
+        .format((getProba(data, 1) - getProba(data, 0)) * 100),
+        'Percentage of ducks back after 2 minutes: {:.01f}%'
+        .format((getProba(data, 2) - getProba(data, 0)) * 100),
         sep='\n')
 
 def ducks(data: float):
