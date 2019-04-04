@@ -27,7 +27,7 @@ def duckReturn(min: float, data: float):
         x += 0.1
     minute = int(x / 60)
     tenSec = int(x % 60 / 10)
-    sec = int(x % 10)
+    sec = round(x % 10)
     return minute, tenSec, sec
 
 
