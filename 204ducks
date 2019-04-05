@@ -8,7 +8,7 @@
 
 from sys import stderr, argv
 from statistics import stdev
-from math import exp, ceil
+from math import exp, sqrt
 
 def error(str: str):
     """Exits with str on error output."""
@@ -30,7 +30,7 @@ def duck_return(min: float, data: float) -> (int, int, int):
     sec = round(x % 10)
     return minute, tenSec, sec
 
-def get_avg_time(data: float) -> (int, int):
+def get_avg_time(data: float, mode = 0) -> (int, int) or float:
     """Get Average Time."""
     t = 0
     result = 0
@@ -39,7 +39,16 @@ def get_avg_time(data: float) -> (int, int):
         t += 0.001
     minute = int(result)
     sec = round((result - int(result)) * 60)
-    return minute, sec
+    return (minute, sec) if mode == 0 else (result)
+
+def get_standard_dev(data: float, avg_time: float):
+    """Get the standard deviation."""
+    result = 0
+    time = 0
+    while time < 100:
+        result += pow(time - avg_time, 2) * get_proba(data, time, 1) / 1000
+        time += 0.001
+    return sqrt(result)
 
 def get_proba(data: float, t: float, proba = 0) -> float:
     """Get the probability for 1 t gave."""
@@ -55,7 +64,8 @@ def display(data: float):
     """Displays results."""
     print('Average return time: {0[0]}m {0[1]}s'
         .format(get_avg_time(data)),
-        'Standard deviation:',
+        'Standard deviation: {:.03f}'
+        .format(get_standard_dev(data, get_avg_time(data, 1))),
         'Time after which 50% of the ducks are back: {0[0]}m {0[1]}{0[2]}s'
         .format(duck_return(0.5, data)),
         'Time after which 99% of the ducks are back: {0[0]}m {0[1]}{0[2]}s'
